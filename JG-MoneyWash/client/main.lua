@@ -187,9 +187,21 @@ end)
 
 RegisterNetEvent('JG:notification')
 AddEventHandler('JG:notification', function (title, description, alertType)
-	lib.notify({
-		title = title,
-		description = description,
-		type = alertType
-	})
+    WashAlert()
+	-- lib.notify({
+	-- 	title = title,
+	-- 	description = description,
+	-- 	type = alertType
+	-- })
 end)
+
+function WashAlert()
+    local job = "police" -- Jobs that will recive the alert
+    local text = "Suspisious Activity" -- Main text alert
+    local coords = GetEntityCoords(PlayerPedId()) -- Alert coords
+    local id = GetPlayerServerId(PlayerId()) -- Player that triggered the alert
+    local title = "Suspisious Activity" -- Main title alert
+    local panic = false -- Allow/Disable panic effect
+   
+    TriggerServerEvent('Opto_dispatch:Server:SendAlert', job, title, text, coords, panic, id)
+end
